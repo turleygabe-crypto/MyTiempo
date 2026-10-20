@@ -38,3 +38,12 @@ form { display:flex; flex-direction:column; gap:.8rem; }
 form label { display:flex; flex-direction:column; gap:.2rem; font-size:.9rem; }
 form label.check { flex-direction:row; align-items:center; gap:.5rem; }
 menu { display:flex; justify-content:flex-end; gap:.5rem; padding:0; margin:0; }
+#ovbar { display:none; }
+body.overlay header { display:none; }
+body.overlay { background:transparent; }
+body.overlay #ovwrap { position:fixed; z-index:10; overflow:auto; resize:both; background:var(--bg); border:1px solid #333d52; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,.5); min-width:200px; min-height:120px; }
+body.overlay #ovbar { display:flex; position:sticky; top:0; z-index:2; align-items:center; justify-content:space-between; gap:.5rem; padding:.4rem .6rem; background:#232c3e; font-size:.8rem; }
+body.overlay #ovbar label { display:flex; align-items:center; gap:.4rem; }
+body.overlay #ovbar input { padding:0; }
+#ovgrip { cursor:move; user-select:none; touch-action:none; flex:1; }
+body.overlay #dashboard { padding:.75rem; }

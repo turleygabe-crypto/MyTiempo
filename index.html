@@ -12,9 +12,17 @@
   <div class="controls">
     <label>My timezone <select id="home"></select></label>
     <button id="add">+ Add clock</button>
+    <button id="ov-on">Overlay</button>
   </div>
 </header>
-<main id="dashboard"></main>
+<div id="ovwrap">
+  <div id="ovbar">
+    <span id="ovgrip">⠿ Drag</span>
+    <label>Opacity <input type="range" id="ov-op" min="0.2" max="1" step="0.05" value="0.9"></label>
+    <button id="ov-off">Exit overlay</button>
+  </div>
+  <main id="dashboard"></main>
+</div>
 
 <dialog id="dlg">
   <form method="dialog" id="form">

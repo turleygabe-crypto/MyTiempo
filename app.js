@@ -233,3 +233,36 @@ $('home').onchange = () => { state.home = $('home').value; save(); render(); };
 
 render();
 setInterval(tick, 1000);
+
+// Overlay mode: floating, draggable, resizable panel with adjustable opacity
+const wrap = $('ovwrap'), opSlider = $('ov-op');
+state.overlay = Object.assign({ on: false, x: 40, y: 40, w: 420, h: 360, opacity: 0.9 }, state.overlay);
+const ov = state.overlay;
+
+function applyOverlay() {
+  document.body.classList.toggle('overlay', ov.on);
+  if (!ov.on) { wrap.style.cssText = ''; return; }
+  ov.x = Math.min(Math.max(0, ov.x), Math.max(0, innerWidth - 80));
+  ov.y = Math.min(Math.max(0, ov.y), Math.max(0, innerHeight - 40));
+  Object.assign(wrap.style, { left: ov.x + 'px', top: ov.y + 'px', width: ov.w + 'px', height: ov.h + 'px', opacity: ov.opacity });
+  opSlider.value = ov.opacity;
+}
+$('ov-on').onclick = () => { ov.on = true; save(); applyOverlay(); };
+$('ov-off').onclick = () => { ov.on = false; save(); applyOverlay(); };
+opSlider.oninput = () => { ov.opacity = +opSlider.value; wrap.style.opacity = ov.opacity; save(); };
+
+$('ovgrip').addEventListener('pointerdown', (e) => {
+  const sx = e.clientX - ov.x, sy = e.clientY - ov.y, grip = e.currentTarget;
+  grip.setPointerCapture(e.pointerId);
+  const move = (m) => { ov.x = m.clientX - sx; ov.y = m.clientY - sy; applyOverlay(); };
+  const up = () => { grip.removeEventListener('pointermove', move); grip.removeEventListener('pointerup', up); save(); };
+  grip.addEventListener('pointermove', move);
+  grip.addEventListener('pointerup', up);
+});
+
+new ResizeObserver(() => {
+  if (!ov.on) return;
+  const w = Math.round(wrap.offsetWidth), h = Math.round(wrap.offsetHeight);
+  if (w !== ov.w || h !== ov.h) { ov.w = w; ov.h = h; save(); }
+}).observe(wrap);
+applyOverlay();
