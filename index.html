@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyTiempo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>MyTiempo</h1>
+  <div class="controls">
+    <label>My timezone <select id="home"></select></label>
+    <button id="add">+ Add clock</button>
+  </div>
+</header>
+<main id="dashboard"></main>
+
+<dialog id="dlg">
+  <form method="dialog" id="form">
+    <h2 id="dlg-title">Add clock</h2>
+    <label>City or timezone <input id="f-tz" list="tzlist" autocomplete="off" placeholder="e.g. Tokyo, Boston, America/Chicago" required></label>
+    <datalist id="tzlist"></datalist>
+    <label>Label <input id="f-label" placeholder="e.g. Tokyo office"></label>
+    <label>People <input id="f-people" placeholder="Comma separated, e.g. Ana, Ben"></label>
+    <label>Style
+      <select id="f-style">
+        <option value="analog">Analog</option>
+        <option value="digital">Digital</option>
+        <option value="both">Analog + Digital</option>
+      </select>
+    </label>
+    <label>Analog face
+      <select id="f-face">
+        <option value="numbers">Numerals</option>
+        <option value="ticks">Ticks only</option>
+        <option value="minimal">Minimal</option>
+      </select>
+    </label>
+    <label>Format
+      <select id="f-hour"><option value="12">12-hour</option><option value="24">24-hour</option></select>
+    </label>
+    <label class="check"><input type="checkbox" id="f-seconds" checked> Show seconds</label>
+    <menu>
+      <button type="button" id="cancel">Cancel</button>
+      <button type="submit" id="save">Save</button>
+    </menu>
+  </form>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
